@@ -20,5 +20,6 @@ Some hints for the installation:
 tmpfs           /mytmp          tmpfs   nodev,nosuid,size=5M 0    0
 ```
 * Needs the following installed tools: socat, jq, curl, mosquitto_pub, setcap, stdbuf
+* Before running forward.sh for the first time, run "setbuf.sh" once. It allows socat to listen on port 80. This is persistent and does not need to be repeated after a reboot.
 
 Enjoy!
