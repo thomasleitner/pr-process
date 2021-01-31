@@ -21,5 +21,6 @@ tmpfs           /mytmp          tmpfs   nodev,nosuid,size=5M 0    0
 ```
 * Needs the following installed tools: socat, jq, curl, mosquitto_pub, setcap, stdbuf
 * Before running forward.sh for the first time, run "setcap.sh" once. It allows socat to listen on port 80. This is persistent and does not need to be repeated after a reboot.
+* Create a directory /home/pi/pr-data. This directory will receive the CVS files with the data for each day.
 
 Enjoy!
