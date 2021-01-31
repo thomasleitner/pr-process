@@ -3,7 +3,7 @@ Raspberry Pi bash scripts to receive data from a NEDAP Powerrouter inverter and 
 
 Some hints for the installation:
 
-* Raspberry PI needs to LAN interfaces:
+* Raspberry PI needs two LAN interfaces:
     1.) one connected directly to the Powerrouter
     2.) one connected the a LAN with internet access
 * Configuration of the LAN interfaces as described here: https://github.com/trebb/p-rout
