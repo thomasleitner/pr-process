@@ -19,4 +19,6 @@ Some hints for the installation:
 ```
 tmpfs           /mytmp          tmpfs   nodev,nosuid,size=5M 0    0
 ```
+* Needs the following installed tools: socat, jq, curl, mosquitto_pub, setcap, stdbuf
+
 Enjoy!
