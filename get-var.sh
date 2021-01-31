@@ -1,8 +1,9 @@
 #!/bin/sh
 export IFS=","
-grep $2 pr-data.dat | ( read mod param var ;
+grep $2 pr-data.dat | ( read mod param var div;
     if [ "$mod" != "" ]; then
-        sh decode.sh $1 $mod $param
+        val=`sh decode.sh $1 $mod $param`
+        echo $val $div | awk '{ print $1 / $2 }'
     fi
 )
 
