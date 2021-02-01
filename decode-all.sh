@@ -7,14 +7,22 @@ fi
 
 MQTT_BROKER=192.168.1.4
 MQTT_TOPIC=powerrouter
-INFLUXDB_HOST='http://xxxxxxxx:8086/api/v2/write?org=MYORG&bucket=MYDB'
-INFLUXDB_TOKEN="yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+INFLUXDB_HOST='http://xxxxxxxxxxxxxxxxxxxxxxxx:8086/api/v2/write?org=MYORG&bucket=MYDB'
+INFLUXDB_TOKEN="yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
 
 FILE=$1
 if [ ! -r $FILE ]; then
     echo "ERROR: cannot find $FILE"
     exit 1
 fi
+
+#cp $FILE /mytmp/test
+
+fgrep param_0 $FILE >/dev/null
+if [ $? -ne 0 ]; then
+    exit 1
+fi
+
 export IFS=","
 CDATA=/mytmp/$$.cdata
 rm -f $CDATA
@@ -28,10 +36,18 @@ fi
 
 HEADER=/mytmp/$$.header
 DATA=/mytmp/$$.data
-touch $HEADER $DATA
+rm -f $HEADER $DATA
+
+DATE=`date +%Y-%m-%d`
+TIME=`date +%H:%M:%S`
+printf "DATE;TIME" >$HEADER
+printf "$DATE;$TIME" >$DATA
 
 cat pr-data.dat | while read mod param var div; do
     val=`sh decode.sh $FILE $mod $param`
+    if [ "$val" = ""]; then
+        continue;
+    fi
     val=`echo $val $div | awk '{ print $1 / $2 }'`
     echo $mod, $param, $var = $val
     if [ "$var" != "" ]; then
